@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["bmalets"]
   spec.email         = ["b.malets@gmail.com"]
   spec.summary       = %q{Search files with phrase by directory path}
-  spec.description   = %q{Search files with phrase by directory path}
+  spec.description   = %q{Search word or phrase in .pdf,.txt,.doc and .docx files by directory path}
   spec.homepage      = "https://github.com/bmalets/search_in_file/blob/master/README.md"
   spec.license       = "MIT"
 
