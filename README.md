@@ -1,6 +1,14 @@
 # SearchInFile
 
-TODO: search files with phrase by directory path
+Search files with phrase by directory path.
+
+To search some document with specified phrase in your file system just use:
+
+	SearchInFile.search( directory_path, search_phrase )
+
+P.S:       
+  - Windows:  it'll search phrase in all .doc, .docx, .pdf and .txt files by directory path 
+  - OS_X or Linux: it'll search phrase in all .docx, .pdf and .txt files by directory path
 
 ## Installation
 

@@ -36,13 +36,13 @@ module SearchInFile
 
   def self.find_by_type_in d_path, f_type
     f_paths = []
-    Find.find( d_path ){ |f| pdf_file_paths << f if extname?( f, f_type ) }
+    Find.find( d_path ){ |f| f_paths << f if extname?( f, f_type ) }
     f_paths
   end
 
   def self.find_all_in d_path
     f_paths = []
-    Find.find( d_path ){ |f| pdf_file_paths << f if is_document?( f ) }
+    Find.find( d_path ){ |f| f_paths << f if is_document?( f ) }
     f_paths
   end
 
