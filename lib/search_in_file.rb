@@ -1,10 +1,12 @@
 require "search_in_file/version"
-require 'find'
+require "search_in_file/settings"
 
 require "file_parsers/txt_parser"
 require "file_parsers/pdf_parser"
-require "file_parsers/doc_parser"
+require "file_parsers/doc_parser" if Gem.win_platform?
 require "file_parsers/docx_parser"
+
+require "find"
 
 module SearchInFile
 
@@ -64,12 +66,7 @@ module SearchInFile
   end
 
   def self.is_document? f_name
-    f_type = extname( f_name )
-    supported_documents.include? f_type
+    Settings.supported_docs.include?( extname(f_name) )
   end    
-
-  def self.supported_documents
-    ['.doc', '.docx', '.pdf', '.txt']
-  end
 
 end
