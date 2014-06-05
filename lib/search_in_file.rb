@@ -8,20 +8,25 @@ require "file_parsers/docx_parser"
 
 module SearchInFile
 
-  # search files by phrase
-  def self.search( dir_path, term )
+  def self.search( path, term )
+    is_document?( path ) ? search_in_file( path, term ) : search_in_directory( path, term )
+  end
+
+  def self.search_in_directory( path, term )
     results = []
-    each_file_in( dir_path ) do |path|  
-      # read file
-      parser_class    = Object.const_get( "#{File.extname( path )[1..-1].capitalize}Parser" )
-      file_content    = parser_class.new.read_file( path )
-      file_paragraphs = file_content.split(/\tor\n|\n/)
-      # search for phrase
-      paragraphs = []
-      file_paragraphs.each{ |p| paragraphs << p if p.include?(term) }
-      results << {file: path, paragraphs: paragraphs} if !paragraphs.empty?
+    each_file_in( path ) do |f_path| 
+      f_result = search_in_file( f_path, term )
+      results = results + f_result if !f_result.empty?
     end
     results
+  end
+
+  def self.search_in_file( f_path, term )
+    term_paragraphs = []
+    file_paragraphs = paragraphs_of( f_path )
+    # search for phrase
+    file_paragraphs.each{ |p| term_paragraphs << p if p.include?(term) }
+    term_paragraphs.empty? ? [] : [{file: f_path, paragraphs: term_paragraphs}]    
   end
 
   def self.content_of file
@@ -31,7 +36,7 @@ module SearchInFile
   end
 
   def self.paragraphs_of file
-    content_of( file ).split(/\tor\n|\n/)
+    content_of( file ).split(/\r/)
   end
 
   def self.find_by_type_in d_path, f_type
@@ -60,7 +65,11 @@ module SearchInFile
 
   def self.is_document? f_name
     f_type = extname( f_name )
-    ['.doc', '.docx', '.pdf', '.txt'].include? f_type
+    supported_documents.include? f_type
   end    
+
+  def self.supported_documents
+    ['.doc', '.docx', '.pdf', '.txt']
+  end
 
 end

@@ -4,23 +4,55 @@ describe "File Search System" do
 
   describe "Search engine tests" do
 
-    10.times do |number|
-      it "Search phrase in directory number #{number}" do
+    STRESS_COUNT.times do |number|
 
-        dir_path  = File.expand_path('../..', __FILE__) + '/fixtures'
+      it "Search phrase in directory or in file number #{number}" do
+        dir_path  = FIXTURE_PATH
         term      = 'Often needs to retrieve documents on its'
         results   = SearchInFile.search( dir_path, term )
 
-        results.class == 'Array'
-        results.count == 9
+        expect(results.class).to eq(Array)
+        expect(results.count).to eq(7)
 
-        results.each do |result| 
-          ['.doc', '.docx', '.pdf', '.txt'].include? File.extname(result[:file])
-          File.exist?( result[:file] ).should == true 
-          
-          result[:paragraphs].each{ |paragraph| paragraph.include? term }
+        results.each do |result|
+          SearchInFile.supported_documents.include? File.extname(result[:file])
+          File.exist?( result[:file] ).should be(true)
+          result[:paragraphs].each{ |paragraph| expect( paragraph.include?(term) ).to be true }
+        end
+
+      end
+
+      it "Search phrase in directory number #{number}" do
+        dir_path  = FIXTURE_PATH
+        term      = 'Often needs to retrieve documents on its'
+        results   = SearchInFile.search_in_directory( dir_path, term )
+
+        expect(results.class).to eq(Array)
+        expect(results.count).to eq(7)
+
+        results.each do |result|
+          SearchInFile.supported_documents.include? File.extname(result[:file])
+          File.exist?( result[:file] ).should be(true)
+          result[:paragraphs].each{ |paragraph| expect( paragraph.include?(term) ).to be true }
+        end
+
+      end
+
+      SearchInFile.supported_documents.each do |f_type|
+        it "Search phrase in #{f_type} file number #{number}" do
+          f_path    = FIXTURE_PATH + "/basic#{f_type}"
+          term      = 'Often needs to retrieve documents on its'
+          results   = SearchInFile.search_in_file( f_path, term )
+
+          expect(results.class).to eq(Array)
+          results.each do |result| 
+            SearchInFile.supported_documents.include? File.extname(result[:file])
+            expect( File.exist?( result[:file] ) ).to be true
+            result[:paragraphs].each{ |paragraph| paragraph.include? term }
+          end
         end
       end
+
     end
 
   end
