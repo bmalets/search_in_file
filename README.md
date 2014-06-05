@@ -1,6 +1,6 @@
 # SearchInFile
 
-TODO: Write a gem description
+TODO: search files with phrase by directory path
 
 ## Installation
 
