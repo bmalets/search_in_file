@@ -20,11 +20,13 @@ Or install it yourself as:
 
 To search some document with specified phrase in your file system just use:
 
-	SearchInFile.search( directory_path, search_phrase )
+	SearchInFile.search( directory_or_file_path, search_phrase )
 
 P.S:       
-  - Windows:  it'll search phrase in all .doc, .docx, .pdf and .txt files by directory path 
-  - OS_X or Linux: it'll search phrase in all .docx, .pdf and .txt files by directory path
+  - Windows: gem supports searching in all .doc, .docx, .pdf and .txt files 
+  - OS_X or Linux: gem supports searching in .docx, .pdf and .txt files
+
+To be continued...
 
 ## Contributing
 
