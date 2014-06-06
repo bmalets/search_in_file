@@ -6,6 +6,8 @@ require "file_parsers/pdf_parser"
 require "file_parsers/doc_parser" if Gem.win_platform?
 require "file_parsers/docx_parser"
 
+require "search_engine/boyermoore"
+
 require "find"
 
 module SearchInFile

@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "pdf-reader", "~> 1.3.3"
   spec.add_development_dependency "docx", "~> 0.2.03"
-  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency "rspec"
 end
