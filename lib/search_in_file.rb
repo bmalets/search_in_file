@@ -18,7 +18,7 @@ module SearchInFile
     results = []
     each_file_in( path ) do |f_path| 
       f_result = search_in_file( f_path, term )
-      results = results + f_result if !f_result.empty?
+      results  = results + f_result if !f_result.empty?
     end
     results
   end
@@ -32,8 +32,8 @@ module SearchInFile
   end
 
   def self.content_of file
-    class_name   = "#{extname( file )[1..-1].capitalize}Parser"
-    parser_class = Object.const_get( class_name )
+    class_name   = extname( file )[1..-1].capitalize
+    parser_class = Object.const_get( class_name + 'Parser' )
     file_content = parser_class.new.read_file( file )
   end
 
