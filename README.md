@@ -1,4 +1,4 @@
-# SearchInFile [![Gem Version](https://badge.fury.io/rb/search_in_file.svg)](http://badge.fury.io/rb/search_in_file)
+# SearchInFile [![Gem Version](https://badge.fury.io/rb/search_in_file.svg)](http://badge.fury.io/rb/search_in_file) [![Code Climate](https://codeclimate.com/github/bmalets/search_in_file/badges/gpa.svg)](https://codeclimate.com/github/bmalets/search_in_file)
 
 Search files with phrase by directory path.
 
