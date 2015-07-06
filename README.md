@@ -1,4 +1,4 @@
-# SearchInFile
+# SearchInFile [![Gem Version](https://badge.fury.io/rb/search_in_file.svg)](http://badge.fury.io/rb/search_in_file)
 
 Search files with phrase by directory path.
 
